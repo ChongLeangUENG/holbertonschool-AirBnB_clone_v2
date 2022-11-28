@@ -10,6 +10,7 @@ def hbnb():
     """web application must be listening on 0.0.0.0, port 5000"""
     return "Hello HBNB!"
 
+
 @app.route('/hbnb', strict_slashes=False)
 def hbnb1():
     """print HBNB"""
