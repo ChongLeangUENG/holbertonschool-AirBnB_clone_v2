@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Write a script that starts a Flask web application:"""
+''' script that starts a Flask web application '''
+
 from flask import Flask
 from flask import render_template
 from models import storage
@@ -9,28 +10,27 @@ app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def handle_teardown():
-    """handle teardown"""
+def teardown_db(exception):
+    """ Function that close """
     storage.close()
 
 
-@app.route('/states')
-def hbnb10():
-    """return state in db"""
-    state = storage.all(State).values()
-    return render_template('9-states.html', state=state)
+@app.route('/states', strict_slashes=False)
+def states():
+    ''' Function that return list of all states '''
+    all_states = storage.all(State).values()
+    return render_template('7-states_list.html', all_states=all_states)
 
 
-@app.route('/states/<id>')
-def hbnb11():
-    """Displays an HTML page with info about <id>, if it exists"""
-    state = storage.all(States).values()
-    for states in state:
-        if states.id == id:
-            return render_template("9-states.html", states=state, id=True)
-    return render_template("9-states.html")
+@app.route('/states/<id>', strict_slashes=False)
+def states_id(id):
+    ''' Function that return list of all states '''
+    all_states = storage.all(State).values()
+    for state in all_states:
+        if state.id == id:
+            return render_template('9-states.html', state=state, id=True)
+    return render_template('9-states.html')
 
 
 if __name__ == '__main__':
-    app.url_map.strict_slashes = False
-    app.run('0.0.0.0', 5000)
+    app.run(host='0.0.0.0', port='5000')
