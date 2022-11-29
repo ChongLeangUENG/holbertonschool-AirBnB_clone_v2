@@ -24,9 +24,10 @@ def hbnb10():
 @app.route('/states/<id>')
 def hbnb11():
     """Displays an HTML page with info about <id>, if it exists"""
-    for state in storage.all("States").values():
-        if state.id == id:
-            return render_template("9-states.html", state=state)
+    state = storage.all(States).values()
+    for states in state:
+        if states.id == id:
+            return render_template("9-states.html", states=state, id=True)
     return render_template("9-states.html")
 
 
