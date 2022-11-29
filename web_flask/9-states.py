@@ -17,7 +17,7 @@ def handle_teardown():
 @app.route('/states')
 def hbnb10():
     """return state in db"""
-    state = storage.all(State)
+    state = storage.all(State).values()
     return render_template('9-states.html', state=state)
 
 
